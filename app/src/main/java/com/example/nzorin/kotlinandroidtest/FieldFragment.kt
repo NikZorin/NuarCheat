@@ -12,7 +12,6 @@ import android.view.View
 import android.view.ViewGroup
 import kotlinx.android.synthetic.main.fragment_field.view.*
 import android.widget.Button
-import android.widget.EditText
 import android.widget.LinearLayout
 import android.widget.TextView
 
@@ -26,22 +25,12 @@ class FieldFragment : Fragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
+        game = arguments.getSerializable(GAME) as Game?
         // Inflate the layout for this fragment
-        if (savedInstanceState != null) {
-            game = savedInstanceState.getSerializable(GAME) as Game?
-        } else {
-            game = arguments.getSerializable(GAME) as Game?
-        }
-
         root = inflater.inflate(R.layout.fragment_field, container, false)
         drawField()
 
         return root
-    }
-
-    override fun onSaveInstanceState(outState: Bundle?) {
-        super.onSaveInstanceState(outState)
-        outState?.putSerializable(GAME, game)
     }
 
     private fun getMoveText(i: Int, j: Int): String {

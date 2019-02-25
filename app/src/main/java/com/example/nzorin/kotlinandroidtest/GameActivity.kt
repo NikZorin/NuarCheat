@@ -36,7 +36,10 @@ class GameActivity : AppCompatActivity() {
         val playerNames = intent.extras.get("players") as ArrayList<String>
         createPlayers(playerNames)
 
-        game = Game(playerList, GameUtils.getFieldSize(playerList.size))
+        game = savedInstanceState?.getSerializable("GAME") as Game?
+        if (game == null) {
+            game = Game(playerList, GameUtils.getFieldSize(playerList.size))
+        }
 
         // Setup spinner
         spinner.adapter = MyAdapter(
@@ -59,6 +62,11 @@ class GameActivity : AppCompatActivity() {
 
             override fun onNothingSelected(parent: AdapterView<*>) {}
         }
+    }
+
+    override fun onSaveInstanceState(outState: Bundle?) {
+        super.onSaveInstanceState(outState)
+        outState?.putSerializable("GAME", game)
     }
 
     private fun readNamesFromJson() {
