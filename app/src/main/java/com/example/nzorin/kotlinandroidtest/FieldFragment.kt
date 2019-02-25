@@ -27,12 +27,21 @@ class FieldFragment : Fragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         // Inflate the layout for this fragment
-        game = arguments.getSerializable(GAME) as Game?
+        if (savedInstanceState != null) {
+            game = savedInstanceState.getSerializable(GAME) as Game?
+        } else {
+            game = arguments.getSerializable(GAME) as Game?
+        }
 
         root = inflater.inflate(R.layout.fragment_field, container, false)
         drawField()
 
         return root
+    }
+
+    override fun onSaveInstanceState(outState: Bundle?) {
+        super.onSaveInstanceState(outState)
+        outState?.putSerializable(GAME, game)
     }
 
     private fun getMoveText(i: Int, j: Int): String {

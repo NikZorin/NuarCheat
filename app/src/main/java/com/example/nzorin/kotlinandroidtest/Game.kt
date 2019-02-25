@@ -3,13 +3,13 @@ package com.example.nzorin.kotlinandroidtest
 import android.content.Context
 import java.io.Serializable
 
-class Game(val players: List<Player>, fieldSize: Int, context: Context) : Serializable {
+class Game(val players: List<Player>, fieldSize: Int) : Serializable {
     val field: Field
     var currentPlayer: Player? = null
 
     init {
         this.currentPlayer = players[0]
-        this.field = Field(fieldSize, context)
+        this.field = Field(fieldSize)
     }
 
     fun move(target: Target, direction: Int, index: Int) {

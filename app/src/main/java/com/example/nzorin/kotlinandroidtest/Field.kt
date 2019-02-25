@@ -1,20 +1,15 @@
 package com.example.nzorin.kotlinandroidtest
 
-import android.content.Context
-import java.io.IOException
 import java.io.Serializable
 import kotlin.collections.ArrayList
-import org.json.JSONObject
 
 
 
-class Field(val size: Int, val context: Context) : Serializable {
+class Field(val size: Int) : Serializable {
     var cards: Array<Array<Card?>>? = null
         private set
-    var names: ArrayList<String> = arrayListOf()
 
     init {
-        readNamesFromJson()
         initCards()
     }
 
@@ -24,22 +19,6 @@ class Field(val size: Int, val context: Context) : Serializable {
         } else {
             moveRow(direction, index)
         }
-    }
-
-    private fun readNamesFromJson() {
-        var json: String? = null
-        try {
-            val `is` = context.getAssets().open("names.json")
-            val size = `is`.available()
-            val buffer = ByteArray(size)
-            `is`.read(buffer)
-            `is`.close()
-            json = String(buffer)
-        } catch (ex: IOException) {
-            ex.printStackTrace()
-        }
-        val obj = JSONObject(json)
-        names.addAll(obj.getString("names").split(","))
     }
 
     private fun moveColumn(direction: Int, index: Int) {
@@ -127,7 +106,7 @@ class Field(val size: Int, val context: Context) : Serializable {
         cards = Array<Array<Card?>>(size) { arrayOfNulls<Card>(size) }
         for (i in 0 until size) {
             for (j in 0 until size) {
-                cards!![i][j] = Card(names[i * size + j])
+                cards!![i][j] = Card(GameActivity.names[i * size + j])
             }
         }
     }

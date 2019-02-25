@@ -2,9 +2,7 @@ package com.example.nzorin.kotlinandroidtest
 
 import android.support.v7.app.AppCompatActivity
 
-import android.support.v4.app.Fragment
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.AdapterView
@@ -15,8 +13,10 @@ import android.support.v7.widget.ThemedSpinnerAdapter
 import android.content.res.Resources.Theme
 
 import kotlinx.android.synthetic.main.activity_game.*
-import kotlinx.android.synthetic.main.fragment_players_info.view.*
 import kotlinx.android.synthetic.main.list_item.view.*
+import org.json.JSONObject
+import java.io.IOException
+
 
 class GameActivity : AppCompatActivity() {
 
@@ -31,10 +31,12 @@ class GameActivity : AppCompatActivity() {
         setSupportActionBar(toolbar)
         supportActionBar?.setDisplayShowTitleEnabled(false)
 
+        readNamesFromJson()
+
         val playerNames = intent.extras.get("players") as ArrayList<String>
         createPlayers(playerNames)
 
-        game = Game(playerList, GameUtils.getFieldSize(playerList.size), this)
+        game = Game(playerList, GameUtils.getFieldSize(playerList.size))
 
         // Setup spinner
         spinner.adapter = MyAdapter(
@@ -57,6 +59,23 @@ class GameActivity : AppCompatActivity() {
 
             override fun onNothingSelected(parent: AdapterView<*>) {}
         }
+    }
+
+    private fun readNamesFromJson() {
+        names = arrayListOf()
+        var json: String? = null
+        try {
+            val `is` = applicationContext.getAssets().open("names.json")
+            val size = `is`.available()
+            val buffer = ByteArray(size)
+            `is`.read(buffer)
+            `is`.close()
+            json = String(buffer)
+        } catch (ex: IOException) {
+            ex.printStackTrace()
+        }
+        val obj = JSONObject(json)
+        names.addAll(obj.getString("names").split(","))
     }
 
     private class MyAdapter(context: Context, objects: Array<String>) : ArrayAdapter<String>(context, R.layout.list_item, objects), ThemedSpinnerAdapter {
@@ -101,4 +120,9 @@ class GameActivity : AppCompatActivity() {
         }
         playerList.add(newPlayer)
     }
+
+    companion object {
+        lateinit var names: ArrayList<String>
+    }
+
 }
