@@ -22,4 +22,5 @@
     <string name="players_сreating_label">Players creating</string>
     <string name="enter_player_name_label">Enter name of player №%1$d</string>
     <string name="names_file_path">names_en.json</string>
+    <string name="language_text">Language</string>
 </resources>

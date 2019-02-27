@@ -5,22 +5,34 @@ import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.support.v7.app.AlertDialog
-import android.widget.Button
-import android.widget.EditText
-import android.widget.RadioGroup
-import android.widget.Toast
+import android.widget.*
+import android.util.DisplayMetrics
+import java.util.*
+
 
 class MainActivity : AppCompatActivity() {
 
     var playerNum : Int = 0
     var playerList : ArrayList<String> = arrayListOf()
-    var currentIndex : Int = 0;
+    var currentIndex : Int = 0
+    var myLocale : Locale? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         val radioGroup = findViewById<RadioGroup>(R.id.playersNumberRadioGroup)
         val startButton = findViewById<Button>(R.id.newGameButton)
+
+        val russianButton = findViewById<ImageButton>(R.id.imageButtonRussia);
+        val englishButton = findViewById<ImageButton>(R.id.imageButtonGb);
+
+        russianButton.setOnClickListener {
+            setLocale("ru")
+        }
+
+        englishButton.setOnClickListener {
+            setLocale("en")
+        }
 
         radioGroup.setOnCheckedChangeListener { group, i ->
             when (i) {
@@ -64,5 +76,16 @@ class MainActivity : AppCompatActivity() {
         val intent = Intent(this, GameActivity::class.java)
         intent.putExtra("players", playerList)
         startActivity(intent)
+    }
+
+    fun setLocale(lang: String) {
+        myLocale = Locale(lang)
+        val res = resources
+        val dm = res.displayMetrics
+        val conf = res.configuration
+        conf.locale = myLocale
+        res.updateConfiguration(conf, dm)
+        val refresh = Intent(this, MainActivity::class.java)
+        startActivity(refresh)
     }
 }

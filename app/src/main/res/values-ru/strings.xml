@@ -23,4 +23,5 @@
     <string name="players_сreating_label">Создание игроков</string>
     <string name="enter_player_name_label">Введите имя %1$d -го игрока</string>
     <string name="names_file_path">names_ru.json</string>
+    <string name="language_text">Язык</string>
 </resources>
