@@ -1,6 +1,6 @@
 package com.example.nzorin.kotlinandroidtest
 
-import android.content.Context
+import android.text.SpannableStringBuilder
 import java.io.Serializable
 
 class Game(val players: List<Player>, fieldSize: Int) : Serializable {
@@ -48,13 +48,13 @@ class Game(val players: List<Player>, fieldSize: Int) : Serializable {
         changeTurn()
     }
 
-    fun getPlayersInfo() : String {
-        val builder = StringBuilder()
+    fun getPlayersInfo() : SpannableStringBuilder {
+        val builder = SpannableStringBuilder()
         for(p in players) {
             builder.append(p.getInfo())
             builder.append("\n")
         }
-        return builder.toString()
+        return builder
     }
 
     private fun changeTurn() {

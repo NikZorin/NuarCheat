@@ -1,3 +1,26 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <string name="app_name">Nuar Cheat</string>
+    <string name="new_game_label">New Game</string>
+    <string name="players_num_label">Number of Players</string>
+    <string name="tree_num">3</string>
+    <string name="four_num">4</string>
+    <string name="five_num">5</string>
+    <string name="six_num">6</string>
+    <string name="eight_num">8</string>
+    <string name="nine_num">9</string>
+    <string name="player_turn_label">%1$s\'s turn</string>
+    <string name="enter_name_label">Name</string>
+    <string name="check_label">Check</string>
+    <string name="kill_label">Kill</string>
+    <string name="choose_action_label">Choose the action</string>
+    <string name="nobody_label">Nobody</string>
+    <string name="done_label">Done</string>
+    <string name="caught_label">Who got caught on the check</string>
+    <string name="died_label">Who died</string>
+    <string name="game_field_label">Game Field</string>
+    <string name="players_tab_label">Players</string>
+    <string name="players_сreating_label">Players creating</string>
+    <string name="enter_player_name_label">Enter name of player №%1$d</string>
+    <string name="names_file_path">names_en.json</string>
 </resources>

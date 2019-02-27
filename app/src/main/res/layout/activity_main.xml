@@ -1,23 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout
+<LinearLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:tools="http://schemas.android.com/tools"
         xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:paddingLeft="@dimen/activity_horizontal_margin"
+        android:paddingRight="@dimen/activity_horizontal_margin"
+        android:paddingTop="@dimen/activity_vertical_margin"
+        android:paddingBottom="@dimen/activity_vertical_margin"
         tools:context=".MainActivity">
 
     <Button
-            android:text="Новая Игра"
+            android:text="@string/new_game_label"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/newGameButton"
-            android:layout_marginTop="120dp"
-            android:layout_marginBottom="9dp"
-            app:layout_constraintEnd_toEndOf="parent" app:layout_constraintBottom_toTopOf="@+id/playersNumText"
-            app:layout_constraintTop_toTopOf="parent" app:layout_constraintStart_toStartOf="parent"/>
+            android:background="@drawable/ripple"
+            android:id="@+id/newGameButton"/>
     <TextView
-            android:text="Количество Игроков"
+            android:text="@string/players_num_label"
             android:layout_width="match_parent"
             android:gravity="center_horizontal"
             android:layout_height="wrap_content"
@@ -37,7 +39,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/playersNumText">
         <RadioButton
-                android:text="3"
+                android:text="@string/tree_num"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/playersNum3"
@@ -46,7 +48,7 @@
                 android:gravity="center"
                 android:layout_weight="1"/>
         <RadioButton
-                android:text="4"
+                android:text="@string/four_num"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/playersNum4"
@@ -55,7 +57,7 @@
                 android:gravity="center"
                 android:layout_weight="1"/>
         <RadioButton
-                android:text="5"
+                android:text="@string/five_num"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:button="@null"
@@ -64,7 +66,7 @@
                 android:id="@+id/playersNum5"
                 android:layout_weight="1"/>
         <RadioButton
-                android:text="6"
+                android:text="@string/six_num"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/playersNum6"
@@ -73,7 +75,7 @@
                 android:gravity="center"
                 android:layout_weight="1"/>
         <RadioButton
-                android:text="8"
+                android:text="@string/eight_num"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:button="@null"
@@ -82,7 +84,7 @@
                 android:id="@+id/playersNum8"
                 android:layout_weight="1"/>
         <RadioButton
-                android:text="9"
+                android:text="@string/nine_num"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/playersNum9"
@@ -91,4 +93,4 @@
                 android:gravity="center"
                 android:layout_weight="1"/>
     </RadioGroup>
-</android.support.constraint.ConstraintLayout>
+</LinearLayout>

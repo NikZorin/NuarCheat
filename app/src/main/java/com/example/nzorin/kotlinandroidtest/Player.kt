@@ -1,5 +1,6 @@
 package com.example.nzorin.kotlinandroidtest
 
+import android.text.SpannableStringBuilder
 import java.io.Serializable
 import java.util.ArrayList
 
@@ -8,12 +9,14 @@ class Player(var name: String?) : Serializable {
     var notPossibleCards: List<Card> = ArrayList()
     var nextPlayer: Player? = null
 
-    fun getInfo(): String {
-        val builder = StringBuilder()
-        builder.append("$name:\n")
-        for (card in MergeUtils.cutLists(possibleCards, notPossibleCards)) {
-            builder.append("${card.name} | ")
+    fun getInfo(): SpannableStringBuilder {
+        val possibleList = MergeUtils.cutLists(possibleCards, notPossibleCards)
+        val builder = SpannableStringBuilder()
+        builder.append("$name(${possibleList.size}):\n")
+        for (card in possibleList) {
+            builder.append(card.getInfo())
         }
-        return builder.toString()
+        builder.append("\n")
+        return builder
     }
 }

@@ -1,5 +1,6 @@
 package com.example.nzorin.kotlinandroidtest
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
@@ -43,8 +44,8 @@ class MainActivity : AppCompatActivity() {
         if (currentIndex < playerNum) {
             val builder = AlertDialog.Builder(this)
             val inflater = layoutInflater
-            builder.setTitle("Создание игроков")
-            builder.setMessage("Введите имя ${currentIndex + 1}-го игрока")
+            builder.setTitle(getString(R.string.players_сreating_label))
+            builder.setMessage(getString(R.string.enter_player_name_label, currentIndex + 1))
             val dialogLayout = inflater.inflate(R.layout.alert_dialog_with_edittext, null)
             val editText  = dialogLayout.findViewById<EditText>(R.id.editText)
             builder.setView(dialogLayout)

@@ -17,13 +17,7 @@
             </intent-filter>
         </activity>
         <activity
-                android:name=".PlayersCreationActivity"
-                android:label="@string/title_activity_players_creation"
-                android:theme="@style/AppTheme.NoActionBar">
-        </activity>
-        <activity
                 android:name=".GameActivity"
-                android:label="@string/title_activity_game"
                 android:theme="@style/AppTheme.NoActionBar">
         </activity>
     </application>

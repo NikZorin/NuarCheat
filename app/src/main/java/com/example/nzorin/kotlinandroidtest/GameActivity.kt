@@ -44,7 +44,7 @@ class GameActivity : AppCompatActivity() {
         // Setup spinner
         spinner.adapter = MyAdapter(
                 toolbar.context,
-                arrayOf("Игровое Поле", "Игроки"))
+                arrayOf(getString(R.string.game_field_label), getString(R.string.players_tab_label)))
 
         spinner.onItemSelectedListener = object : OnItemSelectedListener {
             override fun onItemSelected(parent: AdapterView<*>, view: View?, position: Int, id: Long) {
@@ -73,7 +73,7 @@ class GameActivity : AppCompatActivity() {
         names = arrayListOf()
         var json: String? = null
         try {
-            val `is` = applicationContext.getAssets().open("names.json")
+            val `is` = applicationContext.getAssets().open(getString(R.string.names_file_path))
             val size = `is`.available()
             val buffer = ByteArray(size)
             `is`.read(buffer)

@@ -50,7 +50,7 @@ class FieldFragment : Fragment() {
     private fun drawField() {
         val turnText = root!!.turnTextView as TextView
 
-        turnText.text = "Ход игрока ${game!!.currentPlayer!!.name}"
+        turnText.text = getString(R.string.player_turn_label, game?.currentPlayer?.name)
 
         val field = root!!.llContainer as LinearLayout
 
@@ -64,7 +64,7 @@ class FieldFragment : Fragment() {
 
                 if (i > 0 && i < game!!.field.size + 1 && j > 0 && j < game!!.field.size + 1) {
                     val btn = Button(this.context)
-                    btn.layoutParams = LinearLayout.LayoutParams(ConstraintLayout.LayoutParams.WRAP_CONTENT, ConstraintLayout.LayoutParams.WRAP_CONTENT, 1.0f)
+                    btn.layoutParams = LinearLayout.LayoutParams(ConstraintLayout.LayoutParams.MATCH_PARENT, ConstraintLayout.LayoutParams.MATCH_PARENT, 1.0f)
                     btn.textSize = 8f
                     btn.setText(game!!.field.getCard(i - 1, j - 1).name)
                     if (!game!!.field.getCard(i - 1, j - 1).isAlive) {
@@ -76,7 +76,7 @@ class FieldFragment : Fragment() {
                     row.addView(btn)
                 } else if (i != j && i + j != game!!.field.size + 1) {
                     val btn = Button(root!!.context)
-                    btn.layoutParams = LinearLayout.LayoutParams(ConstraintLayout.LayoutParams.WRAP_CONTENT, ConstraintLayout.LayoutParams.WRAP_CONTENT, 1.0f)
+                    btn.layoutParams = LinearLayout.LayoutParams(ConstraintLayout.LayoutParams.MATCH_PARENT, ConstraintLayout.LayoutParams.MATCH_PARENT, 1.0f)
                     btn.textSize = 20f
                     btn.setText(getMoveText(i, j))
                     btn.setOnClickListener {
@@ -86,7 +86,7 @@ class FieldFragment : Fragment() {
                     row.addView(btn)
                 } else {
                     val btn = Button(this.context)
-                    btn.layoutParams = LinearLayout.LayoutParams(ConstraintLayout.LayoutParams.WRAP_CONTENT, ConstraintLayout.LayoutParams.WRAP_CONTENT, 1.0f)
+                    btn.layoutParams = LinearLayout.LayoutParams(ConstraintLayout.LayoutParams.MATCH_PARENT, ConstraintLayout.LayoutParams.MATCH_PARENT, 1.0f)
                     btn.textSize = 8f
                     btn.setBackgroundColor(Color.TRANSPARENT)
                     btn.setText(" ")
@@ -120,10 +120,10 @@ class FieldFragment : Fragment() {
     }
 
     private fun showChooseActionDialog(i: Int, j: Int) {
-        val items = arrayOf("Допросить", "Убить")
+        val items = arrayOf(getString(R.string.check_label), getString(R.string.kill_label))
         val builder = AlertDialog.Builder(this.context)
         with(builder) {
-            setTitle("Выберите действие")
+            setTitle(getString(R.string.choose_action_label))
             setItems(items) { dialog, index ->
                 if (index == 0) {
                     showInterrogateDialog(i, j)
@@ -143,7 +143,7 @@ class FieldFragment : Fragment() {
         val builder = AlertDialog.Builder(this.context)
 
         with(builder) {
-            setTitle("Кто попался на допросе")
+            setTitle(getString(R.string.caught_label))
             setMultiChoiceItems(items, null) { dialog, index, isChecked ->
                 if (isChecked) {
                     selectedList.add(index)
@@ -151,7 +151,7 @@ class FieldFragment : Fragment() {
                     selectedList.remove(Integer.valueOf(index))
                 }
             }
-            setPositiveButton("Готово") { dialogInterface, k ->
+            setPositiveButton(getString(R.string.done_label)) { dialogInterface, k ->
                 val selected = arrayListOf<Player>()
                 val notSelected = arrayListOf<Player>()
                 for (index in 0 until game!!.players.size) {
@@ -175,11 +175,11 @@ class FieldFragment : Fragment() {
 
     private fun showKillDialog(i: Int, j: Int) {
         val items = Array<String>(game!!.players.size + 1) {
-            index -> if(index == game!!.players.size) "Никто" else game!!.players[index].name!!
+            index -> if(index == game!!.players.size) getString(R.string.nobody_label) else game!!.players[index].name!!
         }
         val builder = AlertDialog.Builder(this.context)
         with(builder) {
-            setTitle("Кто умер")
+            setTitle(getString(R.string.died_label))
             setItems(items) { dialog, index ->
                 if (index == game!!.players.size) {
                     game!!.kill(game!!.currentPlayer!!, i - 1, j - 1, null)
