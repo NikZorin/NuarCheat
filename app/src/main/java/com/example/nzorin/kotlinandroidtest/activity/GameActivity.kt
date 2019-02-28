@@ -1,4 +1,4 @@
-package com.example.nzorin.kotlinandroidtest
+package com.example.nzorin.kotlinandroidtest.activity
 
 import android.support.v7.app.AppCompatActivity
 
@@ -11,6 +11,12 @@ import android.widget.ArrayAdapter
 import android.content.Context
 import android.support.v7.widget.ThemedSpinnerAdapter
 import android.content.res.Resources.Theme
+import com.example.nzorin.kotlinandroidtest.*
+import com.example.nzorin.kotlinandroidtest.entity.Game
+import com.example.nzorin.kotlinandroidtest.entity.Player
+import com.example.nzorin.kotlinandroidtest.fragment.FieldFragment
+import com.example.nzorin.kotlinandroidtest.fragment.PlayersInfoFragment
+import com.example.nzorin.kotlinandroidtest.utils.GameUtils
 
 import kotlinx.android.synthetic.main.activity_game.*
 import kotlinx.android.synthetic.main.list_item.view.*
@@ -21,7 +27,7 @@ import java.io.IOException
 class GameActivity : AppCompatActivity() {
 
     private var game: Game? = null
-    var playerList : ArrayList<Player> = arrayListOf()
+    private var playerList : ArrayList<Player> = arrayListOf()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -73,7 +79,7 @@ class GameActivity : AppCompatActivity() {
         names = arrayListOf()
         var json: String? = null
         try {
-            val `is` = applicationContext.getAssets().open(getString(R.string.names_file_path))
+            val `is` = applicationContext.assets.open(getString(R.string.names_file_path))
             val size = `is`.available()
             val buffer = ByteArray(size)
             `is`.read(buffer)
@@ -92,12 +98,12 @@ class GameActivity : AppCompatActivity() {
         override fun getDropDownView(position: Int, convertView: View?, parent: ViewGroup): View {
             val view: View
 
-            if (convertView == null) {
+            view = if (convertView == null) {
                 // Inflate the drop down using the helper's LayoutInflater
                 val inflater = mDropDownHelper.dropDownViewInflater
-                view = inflater.inflate(R.layout.list_item, parent, false)
+                inflater.inflate(R.layout.list_item, parent, false)
             } else {
-                view = convertView
+                convertView
             }
 
             view.text1.text = getItem(position)
@@ -115,7 +121,7 @@ class GameActivity : AppCompatActivity() {
     }
 
     private fun createPlayers(names: ArrayList<String>) {
-        for(i in 0..names.size - 1) {
+        for(i in 0 until names.size) {
             createPlayer(names[i], i)
         }
         playerList[names.size - 1].nextPlayer = playerList[0]

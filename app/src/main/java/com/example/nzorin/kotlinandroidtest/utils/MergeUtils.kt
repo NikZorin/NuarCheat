@@ -1,15 +1,17 @@
-package com.example.nzorin.kotlinandroidtest
+package com.example.nzorin.kotlinandroidtest.utils
+
+import com.example.nzorin.kotlinandroidtest.entity.Card
 
 object MergeUtils {
 
     fun mergeLists(first: List<Card>, second: List<Card>): List<Card> {
         val res = arrayListOf<Card>()
         if (first.isEmpty()) {
-            return second;
+            return second
         }
 
         if (second.isEmpty()) {
-            return first;
+            return first
         }
 
         for(f in first) {
@@ -19,17 +21,17 @@ object MergeUtils {
                 }
             }
         }
-        return res;
+        return res
     }
 
     fun cutLists(first: List<Card>, second: List<Card>): List<Card> {
         val res = arrayListOf<Card>()
         if (first.isEmpty()) {
-            return arrayListOf();
+            return arrayListOf()
         }
 
         if (second.isEmpty()) {
-            return first;
+            return first
         }
 
         for(f in first) {
@@ -43,17 +45,17 @@ object MergeUtils {
                 res.add(f)
             }
         }
-        return res;
+        return res
     }
 
     fun unionLists(first: List<Card>, second: List<Card>): List<Card> {
         val res = arrayListOf<Card>()
         if (first.isEmpty()) {
-            return second;
+            return second
         }
 
         if (second.isEmpty()) {
-            return first;
+            return first
         }
 
         res.addAll(first)

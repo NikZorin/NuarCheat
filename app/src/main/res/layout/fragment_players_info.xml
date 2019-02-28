@@ -4,7 +4,7 @@
               android:id="@+id/constraintLayout"
               android:layout_width="match_parent"
               android:layout_height="match_parent"
-              tools:context=".PlayersInfoFragment">
+              tools:context=".fragment.PlayersInfoFragment">
 
     <android.support.v4.widget.NestedScrollView android:layout_width="match_parent"
                                                 android:layout_height="match_parent">

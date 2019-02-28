@@ -1,10 +1,11 @@
-package com.example.nzorin.kotlinandroidtest
+package com.example.nzorin.kotlinandroidtest.entity
 
 import android.text.SpannableStringBuilder
+import com.example.nzorin.kotlinandroidtest.utils.MergeUtils
 import java.io.Serializable
 import java.util.ArrayList
 
-class Player(var name: String?) : Serializable {
+class Player(var name: String) : Serializable {
     var possibleCards: List<Card> = ArrayList()
     var notPossibleCards: List<Card> = ArrayList()
     var nextPlayer: Player? = null

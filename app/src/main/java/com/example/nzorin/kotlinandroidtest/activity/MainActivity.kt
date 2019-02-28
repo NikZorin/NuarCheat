@@ -1,21 +1,19 @@
-package com.example.nzorin.kotlinandroidtest
+package com.example.nzorin.kotlinandroidtest.activity
 
-import android.annotation.SuppressLint
 import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.support.v7.app.AlertDialog
 import android.widget.*
-import android.util.DisplayMetrics
+import com.example.nzorin.kotlinandroidtest.R
 import java.util.*
 
 
 class MainActivity : AppCompatActivity() {
 
-    var playerNum : Int = 0
-    var playerList : ArrayList<String> = arrayListOf()
-    var currentIndex : Int = 0
-    var myLocale : Locale? = null
+    private var playerNum : Int = 0
+    private var playerList : ArrayList<String> = arrayListOf()
+    private var currentIndex : Int = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -23,18 +21,7 @@ class MainActivity : AppCompatActivity() {
         val radioGroup = findViewById<RadioGroup>(R.id.playersNumberRadioGroup)
         val startButton = findViewById<Button>(R.id.newGameButton)
 
-        val russianButton = findViewById<ImageButton>(R.id.imageButtonRussia);
-        val englishButton = findViewById<ImageButton>(R.id.imageButtonGb);
-
-        russianButton.setOnClickListener {
-            setLocale("ru")
-        }
-
-        englishButton.setOnClickListener {
-            setLocale("en")
-        }
-
-        radioGroup.setOnCheckedChangeListener { group, i ->
+        radioGroup.setOnCheckedChangeListener { _, i ->
             when (i) {
                 R.id.playersNum3 -> playerNum = 3
                 R.id.playersNum4 -> playerNum = 4
@@ -62,7 +49,7 @@ class MainActivity : AppCompatActivity() {
             val editText  = dialogLayout.findViewById<EditText>(R.id.editText)
             builder.setView(dialogLayout)
             builder.setPositiveButton("OK") {
-                dialogInterface, k -> playerList.add(editText.text.toString())
+                _, _ -> playerList.add(editText.text.toString())
                 currentIndex++
                 createPlayers()
             }
@@ -76,16 +63,5 @@ class MainActivity : AppCompatActivity() {
         val intent = Intent(this, GameActivity::class.java)
         intent.putExtra("players", playerList)
         startActivity(intent)
-    }
-
-    fun setLocale(lang: String) {
-        myLocale = Locale(lang)
-        val res = resources
-        val dm = res.displayMetrics
-        val conf = res.configuration
-        conf.locale = myLocale
-        res.updateConfiguration(conf, dm)
-        val refresh = Intent(this, MainActivity::class.java)
-        startActivity(refresh)
     }
 }

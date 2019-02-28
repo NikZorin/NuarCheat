@@ -1,11 +1,12 @@
-package com.example.nzorin.kotlinandroidtest
+package com.example.nzorin.kotlinandroidtest.entity
 
 import android.text.SpannableStringBuilder
+import com.example.nzorin.kotlinandroidtest.utils.MergeUtils
 import java.io.Serializable
 
 class Game(val players: List<Player>, fieldSize: Int) : Serializable {
     val field: Field
-    var currentPlayer: Player? = null
+    var currentPlayer: Player
 
     init {
         this.currentPlayer = players[0]
@@ -58,6 +59,8 @@ class Game(val players: List<Player>, fieldSize: Int) : Serializable {
     }
 
     private fun changeTurn() {
-        currentPlayer = currentPlayer!!.nextPlayer;
+        if (currentPlayer.nextPlayer != null) {
+            currentPlayer = currentPlayer.nextPlayer!!
+        }
     }
 }
