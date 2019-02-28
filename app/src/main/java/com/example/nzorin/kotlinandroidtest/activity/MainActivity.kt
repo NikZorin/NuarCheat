@@ -8,6 +8,7 @@ import android.widget.*
 import com.example.nzorin.kotlinandroidtest.R
 import java.util.*
 
+private const val PLAYERS = "PLAYERS"
 
 class MainActivity : AppCompatActivity() {
 
@@ -48,7 +49,7 @@ class MainActivity : AppCompatActivity() {
             val dialogLayout = inflater.inflate(R.layout.alert_dialog_with_edittext, null)
             val editText  = dialogLayout.findViewById<EditText>(R.id.editText)
             builder.setView(dialogLayout)
-            builder.setPositiveButton("OK") {
+            builder.setPositiveButton(getString(R.string.ok_label)) {
                 _, _ -> playerList.add(editText.text.toString())
                 currentIndex++
                 createPlayers()
@@ -61,7 +62,7 @@ class MainActivity : AppCompatActivity() {
 
     private fun startNewGame() {
         val intent = Intent(this, GameActivity::class.java)
-        intent.putExtra("players", playerList)
+        intent.putExtra(PLAYERS, playerList)
         startActivity(intent)
     }
 }

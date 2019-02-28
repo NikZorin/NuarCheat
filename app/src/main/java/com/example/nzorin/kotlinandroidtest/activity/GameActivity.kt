@@ -23,6 +23,8 @@ import kotlinx.android.synthetic.main.list_item.view.*
 import org.json.JSONObject
 import java.io.IOException
 
+private const val GAME = "GAME"
+private const val PLAYERS = "PLAYERS"
 
 class GameActivity : AppCompatActivity() {
 
@@ -39,15 +41,15 @@ class GameActivity : AppCompatActivity() {
 
         readNamesFromJson()
 
-        val playerNames = intent.extras.get("players") as ArrayList<String>
+        val playerNamesNotCasted = intent.extras.get(PLAYERS) as ArrayList<*>
+        val playerNames = playerNamesNotCasted.filterIsInstance<String>() as ArrayList<String>
         createPlayers(playerNames)
 
-        game = savedInstanceState?.getSerializable("GAME") as Game?
+        game = savedInstanceState?.getSerializable(GAME) as Game?
         if (game == null) {
             game = Game(playerList, GameUtils.getFieldSize(playerList.size))
         }
 
-        // Setup spinner
         spinner.adapter = MyAdapter(
                 toolbar.context,
                 arrayOf(getString(R.string.game_field_label), getString(R.string.players_tab_label)))
@@ -58,7 +60,7 @@ class GameActivity : AppCompatActivity() {
                 // container view.
                 val newFragment = if (position == 0) FieldFragment() else PlayersInfoFragment()
                 val args = Bundle()
-                args.putSerializable("GAME", game)
+                args.putSerializable(GAME, game)
                 newFragment.arguments = args
 
                 supportFragmentManager.beginTransaction()
@@ -72,7 +74,7 @@ class GameActivity : AppCompatActivity() {
 
     override fun onSaveInstanceState(outState: Bundle?) {
         super.onSaveInstanceState(outState)
-        outState?.putSerializable("GAME", game)
+        outState?.putSerializable(GAME, game)
     }
 
     private fun readNamesFromJson() {

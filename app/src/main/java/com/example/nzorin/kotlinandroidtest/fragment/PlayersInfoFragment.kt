@@ -14,14 +14,14 @@ private const val GAME = "GAME"
 
 class PlayersInfoFragment : Fragment() {
 
-    private var game: Game? = null
+    private lateinit var game: Game
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
-        game = arguments.getSerializable(GAME) as Game?
+        game = arguments.getSerializable(GAME) as Game
 
         val root = inflater.inflate(R.layout.fragment_players_info, container, false)
-        root.section_label.text = game!!.getPlayersInfo()
+        root.section_label.text = game.getPlayersInfo()
         return root
     }
 
